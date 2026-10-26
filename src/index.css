@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-void: #07090D;
+    --bg-surface: #0D1118;
+    --bg-elevated: #141A24;
+    --border-dim: #273142;
+    --border-accent: #29F06B;
+    --text-primary: #E8EDF4;
+    --text-secondary: #929DAD;
+    --phosphor: #8DFF9B;
+    --matrix-green: #29F06B;
+    --ghost-cyan: #70E8F2;
+    --spectral-violet: #A78BFA;
+    --distressed-amber: #F0B76D;
+    --critical-warning: #F06F73;
+  }
+
+  body {
+    background-color: var(--bg-void);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
+  }
+
+  code, pre, .font-terminal {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* CRT Scanlines and Atmosphere */
+.crt-overlay {
+  background: linear-gradient(
+    rgba(13, 17, 24, 0) 50%, 
+    rgba(0, 0, 0, 0.32) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(41, 240, 107, 0.015),
+    rgba(0, 0, 0, 0),
+    rgba(167, 139, 250, 0.015)
+  );
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+}
+
+.crt-vignette {
+  background: radial-gradient(circle at center, transparent 60%, rgba(3, 4, 7, 0.85) 100%);
+  pointer-events: none;
+}
+
+/* Analog Film Grain (Subtle and restrained) */
+.analog-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Glow utility effects */
+.glow-matrix {
+  text-shadow: 0 0 8px rgba(41, 240, 107, 0.6), 0 0 20px rgba(41, 240, 107, 0.25);
+}
+
+.glow-phosphor {
+  text-shadow: 0 0 8px rgba(141, 255, 155, 0.5), 0 0 20px rgba(141, 255, 155, 0.2);
+}
+
+.glow-cyan {
+  text-shadow: 0 0 8px rgba(112, 232, 242, 0.5), 0 0 20px rgba(112, 232, 242, 0.2);
+}
+
+.glow-violet {
+  text-shadow: 0 0 8px rgba(167, 139, 250, 0.5), 0 0 20px rgba(167, 139, 250, 0.2);
+}
+
+.glow-amber {
+  text-shadow: 0 0 8px rgba(240, 183, 109, 0.5), 0 0 20px rgba(240, 183, 109, 0.2);
+}
+
+.box-glow-matrix {
+  box-shadow: 0 0 28px -4px rgba(41, 240, 107, 0.2), inset 0 0 12px -2px rgba(41, 240, 107, 0.08);
+}
+
+.box-glow-cyan {
+  box-shadow: 0 0 28px -4px rgba(112, 232, 242, 0.2), inset 0 0 12px -2px rgba(112, 232, 242, 0.08);
+}
+
+.box-glow-violet {
+  box-shadow: 0 0 28px -4px rgba(167, 139, 250, 0.2), inset 0 0 12px -2px rgba(167, 139, 250, 0.08);
+}
+
+/* Terminal cursor */
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s infinite;
+}
+
+/* Subtle Horror Glitch Animation */
+@keyframes micro-glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-1.5px, 0.5px); }
+  40% { transform: translate(1px, -0.5px); }
+  60% { transform: translate(-0.5px, 0.5px); }
+  80% { transform: translate(1px, 0); }
+  100% { transform: translate(0); }
+}
+
+.animate-glitch {
+  animation: micro-glitch 0.24s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Page entrance transition */
+.page-transition {
+  animation: pageFadeIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Spectral haze drifting */
+@keyframes drift {
+  0% { transform: translateY(0px) scale(1); opacity: 0.2; }
+  50% { transform: translateY(-10px) scale(1.04); opacity: 0.35; }
+  100% { transform: translateY(0px) scale(1); opacity: 0.2; }
+}
+
+.spectral-drift {
+  animation: drift 9s ease-in-out infinite;
+}
+
+/* Custom terminal scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #07090D;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #273142;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #29F06B;
+}
+
+/* Accessibility: Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .crt-overlay, .analog-grain {
+    display: none !important;
+  }
+  .spectral-drift, .page-transition, .animate-glitch {
+    animation: none !important;
+  }
+}

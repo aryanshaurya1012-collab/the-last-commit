@@ -1,0 +1,6 @@
+{
+  "name": "The Last Commit",
+  "description": "A haunted open-weight AI code archaeologist that explains legacy snippets, investigates potential bugs, and suggests modernizations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
